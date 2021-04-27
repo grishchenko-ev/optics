@@ -1,0 +1,20 @@
+/*
+Navigation styles
+ */
+@import "styles/base/mixins";
+@import "styles/base/variables";
+
+nav {
+
+  ul {
+    @include justify-content;
+
+    > li {
+
+      &:not(:last-child) {
+
+        margin-right: (16em/16);
+      }
+    }
+  }
+}

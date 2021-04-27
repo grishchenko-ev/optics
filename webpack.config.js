@@ -24,7 +24,7 @@ const debug = process.env.NODE_ENV !== 'production';
 const env = debug ? 'development' : 'production';
 
 const config = {
-    entry: "./src/app/index.ts",
+    entry: path.resolve("./src/app/index.ts"),
     devServer: {
         publicPath: "/",
         contentBase: './web',
