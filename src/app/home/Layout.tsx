@@ -1,5 +1,5 @@
 import React from "react";
-import {Categories} from "../product/categories";
+import {Categories} from "../products/categories";
 
 export const Layout = () => {
     return <div className="container">

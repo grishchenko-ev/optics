@@ -41,7 +41,7 @@ const config = {
         filename: '[name].[hash:6].js',
         chunkFilename: '[name].[chunkHash:8].js',
         path: path.resolve('./web'),
-        publicPath: "./",
+        publicPath: "/",
         assetModuleFilename: '[name].[hash:6][ext]',
     },
 
