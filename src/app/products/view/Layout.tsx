@@ -1,13 +1,13 @@
 import React from "react";
 import {useHistory} from "react-router-dom";
-import Axios from "axios";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
-import fileDownload from 'js-file-download';
+import {Download} from "./Download";
+import "./styles.scss";
 
 type ImageType = {
     original: string,
-    thumbnail:string
+    thumbnail: string
 }
 
 export interface ViewProps {
@@ -21,9 +21,11 @@ export const Layout = () => {
     const category = pathname.substring(0, useHistory().location.pathname.lastIndexOf('/'));
     const slug = pathname.split("/").pop();
 
+
     React.useEffect(() => {
         const product = import(`../categories${category}`);
         if (!product) {
+
             return;
         }
 
@@ -32,12 +34,22 @@ export const Layout = () => {
         });
 
     }, [setItem, category, slug]);
-    console.log(item?.images)
+
+    const downloadData = item?.images.map((i) => i.original);
+
     return <div className="container column">
         {item && <>
-            <ImageGallery items={item.images} />
+            <ImageGallery items={item.images}/>
             <h3>Артикул: {item.slug}</h3>
-            <a href="http://0.0.0.0:8089/category-1-img.4f3d6d.jpg" download>Download</a>
+            <h2>Доступно для скачивания</h2>
+            <div className="download">
+                {downloadData?.map((url, i) =>
+                    <Download
+                        key={url + i}
+                        url={url}
+                    />
+                )}
+            </div>
         </>}
     </div>
 }

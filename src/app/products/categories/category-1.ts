@@ -12,8 +12,21 @@ export const data: Array<ViewProps> = [
                 thumbnail: img1,
             },
             {
+                original: img2,
+                thumbnail: img2,
+            },
+        ],
+    },
+    {
+        slug: "000002",
+        images: [
+            {
                 original: img1,
                 thumbnail: img1,
+            },
+            {
+                original: img2,
+                thumbnail: img2,
             },
         ],
     },

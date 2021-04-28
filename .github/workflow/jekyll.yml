@@ -1,0 +1,42 @@
+name: Jekyll webform CI
+
+on:
+  push:
+    branches: [ master ]
+
+env:
+  CHAT_ID: ${{ secrets.CHAT_ID }}
+  BOT_API_KEY: ${{ secrets.BOT_API_KEY }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: "2"
+
+      - name: Build
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14.10.0"
+
+      - run: npm ci --only=production
+      - run: npm run build
+
+      - name: Deploy
+        uses: s0/git-publish-subdir-action@v2.4.0
+        env:
+          REPO: self
+          BRANCH: gh-pages
+          FOLDER: web
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: On failure
+        if: ${{ failure() }}
+        run: echo "FAILURE=1" >> $GITHUB_ENV
+
+      - name: On success
+        if: ${{ success() }}
+        run: echo "FAILURE=0" >> $GITHUB_ENV

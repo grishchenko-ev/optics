@@ -112,8 +112,32 @@ body {
     text-align: center;
   }
 
-  .image-gallery {
+  .list {
+    @include flex;
+    @include valign-center;
+    flex-wrap: wrap;
 
+    > li {
+      width: 25%;
+
+      padding: 0 (24em/16) 0;
+    }
+
+    a {
+      display: inline-block;
+
+      transition: transform .2s ease;
+
+      &:hover {
+
+        transform: scale(1.1) translateZ(0);
+      }
+    }
+
+    h3 {
+
+      text-align: center;
+    }
   }
 }
 
