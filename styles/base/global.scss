@@ -32,11 +32,6 @@ body {
   font-weight: $regular;
   color: $color-primary;
 
-  &:not([data-theme]) {
-
-    overflow: hidden;
-  }
-
   &.hidden {
 
     @include breakpoint($mobile-p) {
@@ -47,7 +42,6 @@ body {
 
   .container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
 
     max-width: (1200em/16);
@@ -106,6 +100,20 @@ body {
   .container {
     margin-right: auto;
     margin-left: auto;
+
+    &.column {
+
+      flex-direction: column;
+    }
+  }
+  
+  h1 {
+
+    text-align: center;
+  }
+
+  .image-gallery {
+
   }
 }
 
@@ -131,7 +139,13 @@ article {
 }
 
 main {
+  width: 100%;
+  max-width: (1200em/16);
+
   flex: 1;
+
+  margin-right: auto;
+  margin-left: auto;
 
   @include breakpoint($mobile) {
     display: flex;

@@ -6,10 +6,15 @@ const img2 = require("./images/category-2-img.jpg");
 export const data: Array<ViewProps> = [
     {
         slug: "000001",
-        image: [img1, img2],
-    },
-    {
-        slug: "000002",
-        image: [img1, img2],
+        images: [
+            {
+                original: img1,
+                thumbnail: img1,
+            },
+            {
+                original: img1,
+                thumbnail: img1,
+            },
+        ],
     },
 ]

@@ -1,9 +1,18 @@
 import React from "react";
 import {useHistory} from "react-router-dom";
+import Axios from "axios";
+import ImageGallery from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
+import fileDownload from 'js-file-download';
+
+type ImageType = {
+    original: string,
+    thumbnail:string
+}
 
 export interface ViewProps {
     slug: string,
-    image: Array<string>,
+    images: Array<ImageType>,
 }
 
 export const Layout = () => {
@@ -11,8 +20,6 @@ export const Layout = () => {
     const pathname = useHistory().location.pathname;
     const category = pathname.substring(0, useHistory().location.pathname.lastIndexOf('/'));
     const slug = pathname.split("/").pop();
-
-    console.log(slug)
 
     React.useEffect(() => {
         const product = import(`../categories${category}`);
@@ -25,14 +32,12 @@ export const Layout = () => {
         });
 
     }, [setItem, category, slug]);
-
-    return <div className="container">
+    console.log(item?.images)
+    return <div className="container column">
         {item && <>
-            <picture>
-                <source srcSet={item.image[0]} media="(max-width: 500px)"/>
-                <img src={item.image[0]} alt="Product"/>
-            </picture>
+            <ImageGallery items={item.images} />
             <h3>Артикул: {item.slug}</h3>
+            <a href="http://0.0.0.0:8089/category-1-img.4f3d6d.jpg" download>Download</a>
         </>}
     </div>
 }

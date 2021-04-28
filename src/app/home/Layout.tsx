@@ -2,8 +2,9 @@ import React from "react";
 import {Categories} from "../products/categories";
 
 export const Layout = () => {
-    return <div className="container">
+    return <>
+        <h1>Бренды</h1>
         <Categories />
-    </div>
+    </>
 }
 Layout.displayName = "Home.Layout";
