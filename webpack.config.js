@@ -22,7 +22,7 @@ const meta = require("./meta.json");
 
 const debug = process.env.NODE_ENV !== 'production';
 const env = debug ? 'development' : 'production';
-console.log(env)
+
 const config = {
     entry: path.resolve("./src/app/index.ts"),
     devServer: {
@@ -41,7 +41,7 @@ const config = {
         filename: '[name].[hash:6].js',
         chunkFilename: '[name].[chunkHash:8].js',
         path: path.resolve('./web'),
-        publicPath: env ? "/" : "https://grishchenko-ev.github.io/optics/",
+        publicPath: (process.env.NODE_ENV === "development") ? "/" : "https://grishchenko-ev.github.io/optics/",
         assetModuleFilename: '[name].[hash:6][ext]',
     },
 
