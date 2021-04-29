@@ -5,7 +5,7 @@ import {routes} from "./routes";
 import "../../styles/main.scss";
 
 export const history = createBrowserHistory({
-    basename: (process.env.NODE_ENV === "development") ? "/" : "https://grishchenko-ev.github.io/optics/"
+    basename: (process.env.NODE_ENV === "development") ? "/" : "/optics"
 });
 
 export const Provider: React.FC = () => {
