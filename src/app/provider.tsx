@@ -4,7 +4,9 @@ import {Router, Switch} from "react-router-dom";
 import {routes} from "./routes";
 import "../../styles/main.scss";
 
-export const history = createBrowserHistory();
+export const history = createBrowserHistory({
+    basename: (process.env.NODE_ENV === "development") ? "/" : "https://grishchenko-ev.github.io/optics/"
+});
 
 export const Provider: React.FC = () => {
     return (
@@ -16,7 +18,6 @@ export const Provider: React.FC = () => {
 Provider.displayName = "App.Provider";
 
 const ProviderContent = () => {
-
     return <>
         <Switch>
             {routes()}

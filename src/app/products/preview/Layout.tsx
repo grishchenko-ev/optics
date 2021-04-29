@@ -28,7 +28,7 @@ export const Layout = () => {
     }, [setItems, slug]);
 
     return <ul className="list container">
-        <h2>ds</h2>
+        {items && items.map((item, i) => <li><Item key={i} slug={item.slug} images={item.images} /></li>)}
     </ul>
 }
 Layout.displayName = "Preview.Layout";
