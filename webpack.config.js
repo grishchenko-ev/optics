@@ -41,7 +41,7 @@ const config = {
         filename: '[name].[hash:6].js',
         chunkFilename: '[name].[chunkHash:8].js',
         path: path.resolve('./web'),
-        publicPath: (process.env.NODE_ENV === "development") ? "/" : "https://grishchenko-ev.github.io/optics/",
+        publicPath: (env === "development") ? "/" : "https://grishchenko-ev.github.io/optics/",
         assetModuleFilename: '[name].[hash:6][ext]',
     },
 
