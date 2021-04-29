@@ -144,7 +144,8 @@ const config = {
                 removeComments: !debug,
                 trimCustomFragments: !debug,
                 collapseWhitespace: !debug,
-            }
+            },
+            favicon: "./favicon.ico"
         }),
         new webpack.DefinePlugin({
             'process.env': {
