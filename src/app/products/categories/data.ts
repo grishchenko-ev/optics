@@ -7,7 +7,7 @@ export const categories: Array<ItemProps> = [
     {
         title: "Category 1",
         link: "/category-1",
-        image: category2Img,
+        image: category1Img,
     },
     {
         title: "Category 2",
