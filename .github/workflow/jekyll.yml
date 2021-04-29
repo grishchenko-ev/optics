@@ -31,7 +31,7 @@ jobs:
           REPO: self
           BRANCH: gh-pages
           FOLDER: web
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: On failure
         if: ${{ failure() }}

@@ -17,6 +17,7 @@
     "breakpoint-sass": "^2.7.1",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.3.2",
+    "cross-env": "^5.1.1",
     "css-loader": "^5.0.1",
     "cssnano": "^4.1.10",
     "html-webpack-plugin": "^5.0.0-alpha.15",
@@ -42,7 +43,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production ./node_modules/.bin/webpack --mode=production && cp ./web/index.html ./web/404.html",
+    "build": "cross-env NODE_ENV=production ./node_modules/.bin/webpack && cp ./web/index.html ./web/404.html",
     "start": "webpack serve --mode=development"
   },
   "eslintConfig": {
