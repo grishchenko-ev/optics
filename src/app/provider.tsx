@@ -9,7 +9,6 @@ export const history = createBrowserHistory({
 });
 
 export const Provider: React.FC = () => {
-    console.log(process.env.NODE_ENV, history)
     return (
         <Router history={history}>
             <ProviderContent/>

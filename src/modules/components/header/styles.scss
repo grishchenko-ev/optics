@@ -3,10 +3,30 @@ Header styles
  */
 @import "styles/base/mixins";
 @import "styles/base/variables";
+@import "~breakpoint-sass/stylesheets/breakpoint";
 
 header {
 
-  .container {
+  .contacts {
 
+    > li {
+      display: inline-block;
+
+      @include breakpoint($mobile-p) {
+        display: block;
+
+        text-align: right;
+      }
+
+      &:not(:last-child) {
+        margin-right: (16em/16);
+
+        @include breakpoint($mobile-p) {
+
+          margin-right: 0;
+          margin-bottom: (10em/16);
+        }
+      }
+    }
   }
 }

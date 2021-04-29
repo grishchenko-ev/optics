@@ -8,7 +8,6 @@ export const PageLayout: React.FC = ({ children }) => {
         <main>
             {children}
         </main>
-        <Footer.Layout />
     </>);
 }
 PageLayout.displayName = "Page.Layout";

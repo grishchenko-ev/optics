@@ -3,6 +3,7 @@ View styles
  */
 @import "styles/base/mixins";
 @import "styles/base/variables";
+@import "~breakpoint-sass/stylesheets/breakpoint";
 
 .download {
   @include flex;
@@ -12,5 +13,10 @@ View styles
     width: 20%;
 
     padding: 0 (16em/16);
+
+    @include breakpoint($mobile) {
+
+      width: 50%;
+    }
   }
 }
