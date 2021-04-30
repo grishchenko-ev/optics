@@ -15,8 +15,21 @@ View styles
     padding: 0 (16em/16);
 
     @include breakpoint($mobile) {
-
       width: 50%;
     }
+
+    .icon_movie {
+      width: 100%;
+      height: 168px;
+
+      background: url("./icon-movie.svg") no-repeat;
+      background-size: contain;
+    }
   }
+}
+
+.image-gallery,
+video {
+  width: 100%;
+  max-width: 900px;
 }
