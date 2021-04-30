@@ -1,7 +1,7 @@
 import {ItemProps} from "./index";
 
-export const category1Img = require("./category-1-img.jpg");
-export const category2Img = require("./category-2-img.jpg");
+export const category1Img = require("./images/category-1-img.jpg");
+export const category2Img = require("./images/category-2-img.jpg");
 
 export const categories: Array<ItemProps> = [
     {
