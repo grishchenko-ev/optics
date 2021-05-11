@@ -29,9 +29,8 @@ export const Layout = () => {
 
     return <ul className="list container">
         {items && items.map((item, i) =>
-            <li>
+            <li  key={i}>
                 <Item
-                    key={i}
                     slug={item.slug}
                     images={item.images}
                 />

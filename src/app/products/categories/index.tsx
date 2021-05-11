@@ -11,9 +11,8 @@ export interface ItemProps {
 export const Categories = () => {
     return <ul className="list">
         {categories.map((item, i) =>
-            <li>
+            <li key={item.link}>
                 <Link
-                    key={item.link + i}
                     to={item.link}
                 >
                     <img src={item.image} alt={item.title}/>
