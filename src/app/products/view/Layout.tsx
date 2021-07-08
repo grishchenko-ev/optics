@@ -1,5 +1,5 @@
 import React from "react";
-import {Redirect, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import {Download} from "./Download";
@@ -21,7 +21,6 @@ export const Layout = () => {
     const pathname = useHistory().location.pathname;
     const category = pathname.substring(0, useHistory().location.pathname.lastIndexOf('/'));
     const slug = pathname.split("/").pop();
-
 
     React.useEffect(() => {
         const product = import(`../categories${category}`);

@@ -4,6 +4,7 @@ import {ViewProps} from "../view/Layout";
 
 const Item: React.FC<ViewProps> = ({slug, images}) => {
     const category = useHistory().location.pathname;
+    console.log(category)
 
     return <Link to={`${category}/${slug}`}>
         <img src={images[0].original} alt="Product"/>
