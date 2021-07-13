@@ -4,6 +4,7 @@ import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import {Download} from "./Download";
 import "./styles.scss";
+import {useDataApi} from "../../use-data-api";
 
 type ImageType = {
     original: string,
@@ -21,6 +22,7 @@ export const Layout = () => {
     const pathname = useHistory().location.pathname;
     const category = pathname.substring(0, useHistory().location.pathname.lastIndexOf('/'));
     const slug = pathname.split("/").pop();
+    useDataApi();
 
     React.useEffect(() => {
         const product = import(`../categories${category}`);

@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {categories} from "./data";
+import {useDataApi} from "../../use-data-api";
 
 export interface ItemProps {
     title: string,
@@ -9,6 +10,7 @@ export interface ItemProps {
 }
 
 export const Categories = () => {
+    useDataApi();
     return <ul className="list">
         {categories.map((item, i) =>
             <li key={item.link}>
