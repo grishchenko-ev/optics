@@ -1,7 +1,6 @@
 import React from "react";
 import {Link, useParams, useHistory} from "react-router-dom";
 import {ViewProps} from "../view/Layout";
-import {useDataApi} from "../../use-data-api";
 
 const Item: React.FC<ViewProps> = ({slug, images}) => {
     const category = useHistory().location.pathname;
@@ -15,7 +14,6 @@ const Item: React.FC<ViewProps> = ({slug, images}) => {
 export const Layout = () => {
     const [items, setItems] = React.useState<Array<ViewProps>>();
     const slug = Object.values(useParams());
-    useDataApi();
 
     React.useEffect(() => {
         const categoryItems = import("../categories/" + slug);

@@ -10,6 +10,9 @@ const
     fs = require('fs'),
     webpack = require('webpack');
 
+const dotenv = require("dotenv");
+dotenv.config({path: "./.env"});
+
 // npm dependencies
 const
     HtmlWebpackPlugin = require('html-webpack-plugin'),
@@ -22,6 +25,12 @@ const meta = require("./meta.json");
 
 const debug = process.env.NODE_ENV !== 'production';
 const env = debug ? 'development' : 'production';
+
+const processEnv = Object.fromEntries(
+    Object.entries(process.env)
+        .filter(([, value]) => value !== undefined)
+        .map(([key, value]) => [key, JSON.stringify(value)])
+);
 
 const config = {
     entry: path.resolve("./src/app/index.ts"),
@@ -152,11 +161,7 @@ const config = {
             favicon: "./favicon.ico"
         }),
         new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify(env),
-            },
-            BUILD_TIME: JSON.stringify(new Date().toISOString()),
-            BUILD_VERSION: JSON.stringify(meta.version),
+            'process.env': processEnv,
         }),
         new CopyWebpackPlugin({
             patterns: [
