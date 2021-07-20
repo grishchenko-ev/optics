@@ -4,10 +4,11 @@ import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import {Download} from "./Download";
 import "./styles.scss";
+import {useDataApi} from "../../use-data-api";
 
 type ImageType = {
     original: string,
-    thumbnail: string
+    thumbnail?: string
 }
 
 export interface ViewProps {
@@ -17,6 +18,8 @@ export interface ViewProps {
 }
 
 export const Layout = () => {
+    const data = useDataApi()?.slice(1);
+    console.log(data)
     const [item, setItem] = React.useState<ViewProps>();
     const pathname = useHistory().location.pathname;
     const category = pathname.substring(0, useHistory().location.pathname.lastIndexOf('/'));
@@ -43,8 +46,14 @@ export const Layout = () => {
 
     const video = item.video && Object.values(item.video)[0];
 
+    const galleryData: Array<ImageType> | undefined = data?.map((item) => ({
+        original: process.env.FULL_API_URL + "/" + item,
+        thumbnail: process.env.FULL_API_URL + "/" + item
+    }));
+
+    console.log(galleryData)
     return <div className="container column">
-        <ImageGallery items={item.images}/>
+        {galleryData && <ImageGallery items={galleryData}/>}
         {video && <video controls src={video}>
             <a href={video} download/>
         </video>}
