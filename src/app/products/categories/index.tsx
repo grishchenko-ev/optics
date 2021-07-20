@@ -1,5 +1,4 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import {useDataApi} from "../../use-data-api";
 import * as LinkedImage from "modules/components/linked-image";
 

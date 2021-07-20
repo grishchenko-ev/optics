@@ -41,6 +41,5 @@ export const useDataApi = () => {
         run();
     }, [setUrlList, currentUrl]);
 
-    console.log(urlList)
     return urlList;
 };

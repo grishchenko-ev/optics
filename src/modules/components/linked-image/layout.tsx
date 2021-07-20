@@ -9,8 +9,8 @@ export const Layout: React.FC<ImageProps> = ({src}) => {
     const currentUrl = useHistory().location.pathname;
     const cutSrc = src.replace(/\.[^/.]+$/, "");
 
-    return <Link to={currentUrl + cutSrc}>
+    return <Link to={cutSrc}>
         <img src={process.env.FULL_API_URL + "/" + src} alt={cutSrc}/>
-        <h3>{cutSrc}</h3>
+        <h3>{cutSrc.split("/").pop()}</h3>
     </Link>;
 };
