@@ -19,11 +19,12 @@ export interface ViewProps {
 
 export const Layout = () => {
     const data = useDataApi()?.slice(1);
-    console.log(data)
     const [item, setItem] = React.useState<ViewProps>();
     const pathname = useHistory().location.pathname;
     const category = pathname.substring(0, useHistory().location.pathname.lastIndexOf('/'));
     const slug = pathname.split("/").pop();
+    const fullApi = process.env.FULL_API_URL;
+    console.log(data)
 
     React.useEffect(() => {
         const product = import(`../categories${category}`);
@@ -37,39 +38,36 @@ export const Layout = () => {
 
     }, [setItem, category, slug]);
 
-    const downloadData = item?.images.map((i) => i.original);
-
-
+    const downloadData = data?.map((i) => i);
+    downloadData?.pop();
     if (!item) {
         return <span>Упс! Что то пошло не так(</span>
     }
 
-    const video = item.video && Object.values(item.video)[0];
-
+    const video = data?.filter((item) => item.split('.').pop() === "mp4")[0];
     const galleryData: Array<ImageType> | undefined = data?.map((item) => ({
-        original: process.env.FULL_API_URL + "/" + item,
-        thumbnail: process.env.FULL_API_URL + "/" + item
+        original: fullApi + "/" + item,
+        thumbnail: fullApi + "/" + item
     }));
 
-    console.log(galleryData)
     return <div className="container column">
-        {galleryData && <ImageGallery items={galleryData}/>}
-        {video && <video controls src={video}>
-            <a href={video} download/>
+        {galleryData?.pop() && <ImageGallery items={galleryData}/>}
+        {video && <video controls src={fullApi + "/" + video}>
+            <a href={fullApi + "/" + video} download/>
         </video>}
-        <h3>Артикул: {item.slug}</h3>
+        <h3>Артикул: {slug}</h3>
         <h2>Доступно для скачивания</h2>
         <div className="download">
             {video
                 ? downloadData?.map((url, i) =>
                     <Download
                         key={url + i}
-                        url={url}
-                    />).concat(<Download key={video} url={video} video/>)
+                        url={fullApi + "/" + url}
+                    />).concat(<Download key={video} url={fullApi + "/" + video} video/>)
                 : downloadData?.map((url, i) =>
                     <Download
                         key={url + i}
-                        url={url}
+                        url={fullApi + "/" + url}
                     />)
             }
         </div>
