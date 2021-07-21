@@ -1,0 +1,1 @@
+(self.webpackChunkoptics_site=self.webpackChunkoptics_site||[]).push([[752],{4752:function(s,e,t){"use strict";s.exports=t.p+"category-1-img.4f3d6d.jpg"}}]);

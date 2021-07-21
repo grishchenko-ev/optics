@@ -1,0 +1,1 @@
+(self.webpackChunkoptics_site=self.webpackChunkoptics_site||[]).push([[925],{8925:function(s,e,t){"use strict";s.exports=t.p+"category-2-img.879b55.jpg"}}]);
