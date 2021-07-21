@@ -1,30 +1,45 @@
 import * as React from "react";
-import axios from "axios";
+import {useHistory} from "react-router-dom";
+import {ListObjectsCommand, S3Client} from "@aws-sdk/client-s3";
 
-export const useDataApi = (initialUrl: string, initialData: []) => {
-    const [data, setData] = React.useState(initialData);
-    const [url, setUrl] = React.useState(initialUrl);
-    const [isLoading, setIsLoading] = React.useState(false);
-    const [isError, setIsError] = React.useState(false);
+export const useDataApi = () => {
+    const currentUrl = useHistory().location.pathname;
+    const [urlList, setUrlList] = React.useState<(string)[]>();
 
     React.useEffect(() => {
-        const fetchData = async () => {
-            setIsError(false);
-            setIsLoading(true);
+        const s3Client = new S3Client({
+            region: "ams3",
+            endpoint: process.env.API_URL,
+            credentials: {
+                accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID as string,
+                secretAccessKey: process.env.REACT_APP_ACCESS_SECRET_KEY as string
+            },
+        });
+        const notMain = currentUrl.length > 1;
 
+        const run = async () => {
             try {
-                const result = await axios(url);
+                await s3Client.send(new ListObjectsCommand({
+                    Bucket: "optics",
+                    Prefix: notMain ? (currentUrl.slice(1) + "/") : undefined,
+                    Delimiter: "/",
+                })).then((data) => {
+                    if (data.Contents) {
+                        const filteredList = data.Contents
+                            .map((item) => item.Key)
+                            .filter((filteredItem): filteredItem is string => !!filteredItem);
 
-                setData(result.data);
-            } catch (error) {
-                setIsError(true);
+                        return setUrlList(filteredList);
+                    }
+                });
+
+            } catch (err) {
+                console.log("Error", err);
             }
-
-            setIsLoading(false);
         };
 
-        fetchData();
-    }, [url]);
-
-    return [{ data, isLoading, isError }, setUrl];
+        run();
+    }, [setUrlList, currentUrl]);
+    console.log(urlList)
+    return urlList;
 };

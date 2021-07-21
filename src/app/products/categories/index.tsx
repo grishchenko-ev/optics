@@ -1,6 +1,6 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import {categories} from "./data";
+import {useDataApi} from "../../use-data-api";
+import * as LinkedImage from "modules/components/linked-image";
 
 export interface ItemProps {
     title: string,
@@ -8,16 +8,17 @@ export interface ItemProps {
     image: string,
 }
 
-export const Categories = () => {
+export const Categories: React.FC<{}> = () => {
+    const data = useDataApi();
+
+    if (!data) {
+        return null;
+    }
+
     return <ul className="list">
-        {categories.map((item, i) =>
-            <li key={item.link}>
-                <Link
-                    to={item.link}
-                >
-                    <img src={item.image} alt={item.title}/>
-                    <h3>{item.title}</h3>
-                </Link>
+        {data?.map((item, i) =>
+            <li key={item}>
+                <LinkedImage.Layout src={item} />
             </li>
         )}
     </ul>
