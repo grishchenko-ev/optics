@@ -19,37 +19,18 @@ export interface ViewProps {
 
 export const Layout = () => {
     const data = useDataApi()?.slice(1);
-    const [item, setItem] = React.useState<ViewProps>();
     const pathname = useHistory().location.pathname;
-    const category = pathname.substring(0, useHistory().location.pathname.lastIndexOf('/'));
     const slug = pathname.split("/").pop();
     const fullApi = process.env.FULL_API_URL;
-    console.log(data)
-
-    React.useEffect(() => {
-        const product = import(`../categories${category}`);
-        if (!product) {
-            return;
-        }
-
-        product.then(({data}) => {
-            setItem(data.find((i: any) => i.slug === slug))
-        });
-
-    }, [setItem, category, slug]);
-
     const downloadData = data?.map((i) => i);
     downloadData?.pop();
-    if (!item) {
-        return <span>Упс! Что то пошло не так(</span>
-    }
 
     const video = data?.filter((item) => item.split('.').pop() === "mp4")[0];
     const galleryData: Array<ImageType> | undefined = data?.map((item) => ({
         original: fullApi + "/" + item,
         thumbnail: fullApi + "/" + item
     }));
-
+    console.log(galleryData)
     return <div className="container column">
         {galleryData?.pop() && <ImageGallery items={galleryData}/>}
         {video && <video controls src={fullApi + "/" + video}>
