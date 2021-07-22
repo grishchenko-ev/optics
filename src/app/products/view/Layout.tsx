@@ -23,16 +23,15 @@ export const Layout = () => {
     const slug = pathname.split("/").pop();
     const fullApi = process.env.FULL_API_URL;
     const downloadData = data?.map((i) => i);
-    downloadData?.pop();
 
     const video = data?.filter((item) => item.split('.').pop() === "mp4")[0];
     const galleryData: Array<ImageType> | undefined = data?.map((item) => ({
         original: fullApi + "/" + item,
         thumbnail: fullApi + "/" + item
     }));
-    console.log(galleryData)
+    console.log(data)
     return <div className="container column">
-        {galleryData?.pop() && <ImageGallery items={galleryData}/>}
+        {galleryData && <ImageGallery items={galleryData}/>}
         {video && <video controls src={fullApi + "/" + video}>
             <a href={fullApi + "/" + video} download/>
         </video>}
