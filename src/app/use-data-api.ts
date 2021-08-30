@@ -1,6 +1,7 @@
 import * as React from "react";
 import {useHistory} from "react-router-dom";
 import {ListObjectsCommand, S3Client} from "@aws-sdk/client-s3";
+import {log} from "util";
 
 export const useDataApi = () => {
     const currentUrl = useHistory().location.pathname;
@@ -40,6 +41,6 @@ export const useDataApi = () => {
 
         run();
     }, [setUrlList, currentUrl]);
-    console.log(urlList)
+    // console.log(urlList)
     return urlList;
 };

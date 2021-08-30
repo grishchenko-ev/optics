@@ -18,18 +18,20 @@ export interface ViewProps {
 }
 
 export const Layout = () => {
-    const data = useDataApi()?.slice(1);
+    const data = useDataApi();
+    console.log(data?.filter(file => file.indexOf(".mp4") !== -1))
     const pathname = useHistory().location.pathname;
     const slug = pathname.split("/").pop();
     const fullApi = process.env.FULL_API_URL;
-    const downloadData = data?.map((i) => i);
+    const extension = ".jpg";
+    const downloadData = data?.filter(file => file.endsWith(extension)).map((i) => i);
 
     const video = data?.filter((item) => item.split('.').pop() === "mp4")[0];
-    const galleryData: Array<ImageType> | undefined = data?.map((item) => ({
+    const galleryData: Array<ImageType> | undefined = data?.filter(file => file.endsWith(extension)).map((item) => ({
         original: fullApi + "/" + item,
         thumbnail: fullApi + "/" + item
     }));
-    console.log(data)
+
     return <div className="container column">
         {galleryData && <ImageGallery items={galleryData}/>}
         {video && <video controls src={fullApi + "/" + video}>
