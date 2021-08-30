@@ -7,9 +7,8 @@ type ImageProps = {
 
 export const Layout: React.FC<ImageProps> = ({src}) => {
     const cutSrc = src.replace(/\.[^/.]+$/, "");
-    console.log(cutSrc)
 
-    return <Link to={cutSrc}>
+    return <Link to={"/" + cutSrc}>
         <img src={process.env.FULL_API_URL + "/" + src} alt={cutSrc}/>
         <h3>{cutSrc.split("/").pop()}</h3>
     </Link>;
