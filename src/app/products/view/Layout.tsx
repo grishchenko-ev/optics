@@ -3,8 +3,8 @@ import {useHistory} from "react-router-dom";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import {Download} from "./Download";
-import "./styles.scss";
 import {useDataApi} from "../../use-data-api";
+import "./styles.scss";
 
 type ImageType = {
     original: string,
@@ -19,15 +19,21 @@ export interface ViewProps {
 
 export const Layout = () => {
     const data = useDataApi();
-    console.log(data?.filter(file => file.indexOf(".mp4") !== -1))
     const pathname = useHistory().location.pathname;
     const slug = pathname.split("/").pop();
     const fullApi = process.env.FULL_API_URL;
-    const extension = ".jpg";
-    const downloadData = data?.filter(file => file.endsWith(extension)).map((i) => i);
+    const formattedData = (data: Array<string> | undefined, extension: string): Array<string> | null => {
+        if (!data) {
+            return null;
+        }
 
+        return data.filter(file => file.endsWith(extension));
+    }
+    const extension = ".jpg";
+
+    const downloadData = formattedData(data, extension)?.map((i) => i);
     const video = data?.filter((item) => item.split('.').pop() === "mp4")[0];
-    const galleryData: Array<ImageType> | undefined = data?.filter(file => file.endsWith(extension)).map((item) => ({
+    const galleryData: Array<ImageType> | undefined = formattedData(data, extension)?.map((item) => ({
         original: fullApi + "/" + item,
         thumbnail: fullApi + "/" + item
     }));
