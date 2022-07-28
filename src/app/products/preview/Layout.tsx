@@ -1,20 +1,22 @@
-import React from "react";
-import {useDataApi} from "../../use-data-api";
-import * as LinkedImage from "modules/components/linked-image";
+import React from 'react';
+import { useDataApi } from '../../use-data-api';
+import * as LinkedImage from 'modules/components/linked-image';
 
 export const Layout = () => {
-    const data = useDataApi()?.slice(1);
+  const data = useDataApi()?.slice(1);
 
-    if (!data) {
-        return null;
-    }
+  if (!data) {
+    return null;
+  }
 
-    return <ul className="list container">
-        {data.map((item, i) =>
-            <li  key={i}>
-                <LinkedImage.Layout src={item} />
-            </li>
-        )}
+  return (
+    <ul className="list container">
+      {data.map((item, i) => (
+        <li key={i}>
+          <LinkedImage.Layout src={item} />
+        </li>
+      ))}
     </ul>
-}
-Layout.displayName = "Preview.Layout";
+  );
+};
+Layout.displayName = 'Preview.Layout';
