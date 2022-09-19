@@ -1,8 +1,21 @@
-import React from 'react';
-import { useDataApi } from '../../use-data-api';
-import * as LinkedImage from 'modules/components/linked-image';
+import React from "react";
+import { useDataApi } from "../../use-data-api";
+import * as LinkedImage from "modules/components/linked-image";
+import { useScrollPosition } from "modules/hooks/use-scroll-position";
 
 export const Layout = () => {
+  useScrollPosition();
+  const storedScrollPosition = Number(localStorage.getItem("scroll"));
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      window.scrollTo({
+        top: storedScrollPosition ?? 0,
+        behavior: "smooth",
+      });
+    }, 700);
+  }, []);
+
   const data = useDataApi()?.slice(1);
 
   if (!data) {
@@ -19,4 +32,4 @@ export const Layout = () => {
     </ul>
   );
 };
-Layout.displayName = 'Preview.Layout';
+Layout.displayName = "Preview.Layout";
