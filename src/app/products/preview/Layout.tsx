@@ -16,15 +16,18 @@ export const Layout = () => {
     }, 700);
   }, []);
 
-  const data = useDataApi()?.slice(1);
+  const data = useDataApi();
 
   if (!data) {
-    return null;
+    return <div>No data</div>;
   }
+
+  const formattedData =
+  data[0].charAt(data[0].length - 1) === '/' ? data.slice(1) : data;
 
   return (
     <ul className="list container">
-      {data.map((item, i) => (
+      {formattedData.map((item, i) => (
         <li key={i}>
           <LinkedImage.Layout src={item} />
         </li>
