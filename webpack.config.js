@@ -47,11 +47,10 @@ const config = {
     },
 
     output: {
-        filename: '[name].[hash:6].js',
-        chunkFilename: '[name].[hash:8].js',
-        path: path.resolve('./web'),
-        publicPath: (env === "development") ? "/" : "https://grishchenko-ev.github.io/optics/",
-        assetModuleFilename: '[name].[hash:6][ext]',
+        filename:(env === "production") ? '[name].[contenthash].js' : '[name].js',
+        
+        path: path.resolve(__dirname, "./web"),
+       
     },
 
     devtool: debug ? "source-map" : false,
@@ -214,6 +213,7 @@ const config = {
             },
         },
     },
+    mode: (env === "production") ? 'production' : 'development',
     stats: debug || 'errors-only',
 };
 
