@@ -1,0 +1,43 @@
+.btn_copy {
+    display: flex;
+    align-items: center;
+
+    margin-top: 12px;
+    padding: 4px 8px;
+
+    border: 1px solid rgb(56, 90, 113);
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background-color: rgb(56, 90, 113);
+
+        span {
+            color: #fff;
+        }
+        .icon {
+            path {
+                fill: #fff;
+            }
+        }
+    }
+
+    span {
+        font-size: 14px;
+        transition: color 0.2s ease;
+
+        & + .icon {
+            margin-left: 6px;
+        }
+    }
+
+    .icon {
+        width: 20px;
+
+        path {
+            transition: fill 0.2s ease;
+        }
+    }
+}

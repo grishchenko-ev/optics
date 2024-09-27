@@ -4,3 +4,5 @@ node_modules/
 build/
 web/
 .DS_Store
+.env
+.htaccess

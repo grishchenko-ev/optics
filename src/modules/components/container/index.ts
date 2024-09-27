@@ -3,7 +3,7 @@ export interface ContainerProps {
 }
 
 export function ContainerElement(): HTMLElement {
-    const  parentNode = document.body;
+    const parentNode = document.body;
 
     let element: HTMLElement | null = parentNode.querySelector(`optics-site`);
     if (element === null) {

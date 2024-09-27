@@ -5,20 +5,20 @@
 /*
 * Susy breakpoints
 */
-$portrait: (min-width 1px) (max-aspect-ratio '13 / 9');
-$landscape: (min-width 1px) (min-aspect-ratio '13 / 9');
+$portrait: (min-width 1px) (max-aspect-ratio "13 / 9");
+$landscape: (min-width 1px) (min-aspect-ratio "13 / 9");
 
 // Mobile
-$iphone4-p:(max-width 320px) (max-height 480px);
-$iphone4-l:(max-width 480px) (max-height 320px);
-$iphone5-p:(max-width 320px) (max-height 568px);
-$iphone5-l:(max-width 568px) (max-height 320px);
+$iphone4-p: (max-width 320px) (max-height 480px);
+$iphone4-l: (max-width 480px) (max-height 320px);
+$iphone5-p: (max-width 320px) (max-height 568px);
+$iphone5-l: (max-width 568px) (max-height 320px);
 $mobile: (max-width 767px);
-$mobile-p: (max-width 767px) (max-aspect-ratio '13 / 9');
-$mobile-l: (max-width 767px) (min-aspect-ratio '13 / 9');
-$mobile-l-sm: (max-width 699px) (min-aspect-ratio '13 / 9');
-$mobile-l-md: (min-width 640px) (max-width 1023px) (min-aspect-ratio '13 / 9');
-$mobile-l-lg: (min-width 720px) (max-width 1023px) (min-aspect-ratio '13 / 9');
+$mobile-p: (max-width 767px) (max-aspect-ratio "13 / 9");
+$mobile-l: (max-width 767px) (min-aspect-ratio "13 / 9");
+$mobile-l-sm: (max-width 699px) (min-aspect-ratio "13 / 9");
+$mobile-l-md: (min-width 640px) (max-width 1023px) (min-aspect-ratio "13 / 9");
+$mobile-l-lg: (min-width 720px) (max-width 1023px) (min-aspect-ratio "13 / 9");
 
 // Tablet
 $tablet-common: (max-width 1024px);
@@ -66,8 +66,8 @@ $section-content-indent-x-tablet: (30em/16);
 $section-content-indent-x-tablet-lg: (112em/16);
 
 // Fonts
-$font-primary: 'Space Grotesk', sans-serif;;
-$font-secondary: 'Arial', sans-serif;
+$font-primary: "Space Grotesk", sans-serif;
+$font-secondary: "Arial", sans-serif;
 $light: 300;
 $regular: 400;
 $medium: 500;
@@ -83,17 +83,17 @@ $home-chat-bg-color: #eff8ff;
 
 // z-index: map-get($zindex, ...);
 $zindex: (
-  preloader       : 1100,
-  modal           : 1000,
-  overlay         : 900,
-  hamburger       : 800,
-  main-nav        : 701,
-  header          : 700,
-  bot             : 602,
-  nav             : 600,
-  tooltip         : 500,
-  footer          : 400,
-  dropdown        : 300,
-  aside           : 200,
-  under           : -1,
+    preloader: 1100,
+    modal: 1000,
+    overlay: 900,
+    hamburger: 800,
+    main-nav: 701,
+    header: 700,
+    bot: 602,
+    nav: 600,
+    tooltip: 500,
+    footer: 400,
+    dropdown: 300,
+    aside: 200,
+    under: -1,
 );

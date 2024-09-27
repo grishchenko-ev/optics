@@ -5,26 +5,24 @@
  * This file is Dark and full of Terrors
  */
 // tslint:disable
-const
-    path = require('path'),
-    fs = require('fs'),
-    webpack = require('webpack');
+const path = require("path"),
+    fs = require("fs"),
+    webpack = require("webpack");
 
 const dotenv = require("dotenv");
-dotenv.config({path: "./.env"});
+dotenv.config({ path: "./.env" });
 
 // npm dependencies
-const
-    HtmlWebpackPlugin = require('html-webpack-plugin'),
+const HtmlWebpackPlugin = require("html-webpack-plugin"),
     MiniCssExtractPlugin = require("mini-css-extract-plugin"),
-    { CleanWebpackPlugin } = require('clean-webpack-plugin'),
-    CopyWebpackPlugin = require('copy-webpack-plugin'),
+    { CleanWebpackPlugin } = require("clean-webpack-plugin"),
+    CopyWebpackPlugin = require("copy-webpack-plugin"),
     TerserPlugin = require("terser-webpack-plugin");
 
 const meta = require("./meta.json");
 
-const debug = process.env.NODE_ENV !== 'production';
-const env = debug ? 'development' : 'production';
+const debug = process.env.NODE_ENV !== "production";
+const env = debug ? "development" : "production";
 
 const processEnv = Object.fromEntries(
     Object.entries(process.env)
@@ -36,7 +34,7 @@ const config = {
     entry: path.resolve("./src/app/index.ts"),
     devServer: {
         publicPath: "/",
-        contentBase: './web',
+        contentBase: "./web",
         noInfo: false,
         hot: true,
         inline: true,
@@ -47,26 +45,24 @@ const config = {
     },
 
     output: {
-        filename:(env === "production") ? '[name].[contenthash].js' : '[name].js',
-        
+        filename:
+            env === "production" ? "[name].[contenthash].js" : "[name].js",
+
         path: path.resolve(__dirname, "./web"),
-       
+        publicPath: "/",
     },
 
     devtool: debug ? "source-map" : false,
 
     resolve: {
-        extensions: [".ts", ".tsx", ".js", ".json", ".jsx", ".css",],
-        modules: [
-            path.resolve('node_modules'),
-            path.resolve('src'),
-        ],
+        extensions: [".ts", ".tsx", ".js", ".json", ".jsx", ".css"],
+        modules: [path.resolve("node_modules"), path.resolve("src")],
         alias: {
-            normalize: path.join(__dirname, '/node_modules/normalize.css'),
+            normalize: path.join(__dirname, "/node_modules/normalize.css"),
         },
         fallback: {
             util: require.resolve("util/"),
-        }
+        },
     },
 
     module: {
@@ -90,21 +86,20 @@ const config = {
                         loader: "postcss-loader",
                         options: {
                             postcssOptions: {
-                                plugins: [
-                                    "autoprefixer",
-                                    "cssnano",
-                                ],
+                                plugins: ["autoprefixer", "cssnano"],
                             },
                             sourceMap: debug,
-                        }
+                        },
                     },
                     {
                         loader: "sass-loader",
                         options: {
                             sassOptions: {
                                 includePaths: [
-                                    path.resolve("./node_modules/compass-mixins/lib"),
-                                    path.resolve(__dirname + './styles'),
+                                    path.resolve(
+                                        "./node_modules/compass-mixins/lib"
+                                    ),
+                                    path.resolve(__dirname + "./styles"),
                                 ],
                             },
                             sourceMap: debug,
@@ -124,19 +119,17 @@ const config = {
                 test: /\.tsx?$/,
                 use: [
                     { loader: "babel-loader" },
-                    { loader: "awesome-typescript-loader", }
-                ]
+                    { loader: "ts-loader" },
+                ],
             },
             {
                 test: /\.jsx?$/,
                 exclude: [/node_modules/],
-                use: [
-                    { loader: "babel-loader", }
-                ]
+                use: [{ loader: "babel-loader" }],
             },
             {
                 test: /\.mp4$/,
-                use: 'file-loader?name=videos/[name].[ext]',
+                use: "file-loader?name=videos/[name].[ext]",
             },
         ],
     },
@@ -147,7 +140,10 @@ const config = {
             chunkFilename: `[name].[hash].css`,
         }),
         new CleanWebpackPlugin(),
-        new webpack.IgnorePlugin(/caniuse-lite\/data\/regions/),
+        new webpack.IgnorePlugin({
+            resourceRegExp: /\.\/native/,
+            contextRegExp: /\/pg\//,
+        }),
         new HtmlWebpackPlugin({
             title: "Optics",
             minify: {
@@ -157,10 +153,10 @@ const config = {
                 trimCustomFragments: !debug,
                 collapseWhitespace: !debug,
             },
-            favicon: "./favicon.ico"
+            favicon: "./favicon.ico",
         }),
         new webpack.DefinePlugin({
-            'process.env': processEnv,
+            "process.env": processEnv,
         }),
         new CopyWebpackPlugin({
             patterns: [
@@ -172,7 +168,7 @@ const config = {
                     from: path.resolve("./meta.json"),
                     to: path.resolve("./web/meta.json"),
                 },
-            ]
+            ],
         }),
     ],
     optimization: {
@@ -197,30 +193,32 @@ const config = {
                 vendor: {
                     name: "vendor",
                     chunks: "all",
-                    test: new RegExp("[\\/]node_modules[\\/](" + [
-                        "@babel/runtime",
-                        "core-js",
-                        "react",
-                        "react-dom",
-                        "react-helmet",
-                        "react-router",
-                        "react-router-dom",
-                        "scheduler",
-                        "react-img-webp",
-                        "axios"
-                    ].join("|") + ")[\\/]"),
+                    test: new RegExp(
+                        "[\\/]node_modules[\\/](" +
+                            [
+                                "@babel/runtime",
+                                "core-js",
+                                "react",
+                                "react-dom",
+                                "react-helmet",
+                                "react-router",
+                                "react-router-dom",
+                                "scheduler",
+                                "react-img-webp",
+                                "axios",
+                            ].join("|") +
+                            ")[\\/]"
+                    ),
                 },
             },
         },
     },
-    mode: (env === "production") ? 'production' : 'development',
-    stats: debug || 'errors-only',
+    mode: env === "production" ? "production" : "development",
+    stats: debug || "errors-only",
 };
 
 if (debug) {
-    config.plugins.push(
-        new webpack.HotModuleReplacementPlugin()
-    );
+    config.plugins.push(new webpack.HotModuleReplacementPlugin());
 }
 
 module.exports = config;
