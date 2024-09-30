@@ -60,7 +60,7 @@ export const Layout = () => {
             {downloadData && (
                 <CopyButton value={fullApi + "/" + downloadData[0]} />
             )}
-            <h2>Доступно для скачивания</h2>
+            <h2>Доступно для завантаження</h2>
             <div className="download">
                 {video
                     ? downloadData

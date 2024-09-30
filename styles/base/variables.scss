@@ -5,6 +5,8 @@
 /*
 * Susy breakpoints
 */
+@use "sass:math";
+
 $portrait: (min-width 1px) (max-aspect-ratio "13 / 9");
 $landscape: (min-width 1px) (min-aspect-ratio "13 / 9");
 
@@ -60,10 +62,10 @@ $page-width: 1200px;
 $article-width: 965px;
 
 // Indent
-$section-content-indent-x: (152em/16);
-$section-content-indent-x-mob: (24em/16);
-$section-content-indent-x-tablet: (30em/16);
-$section-content-indent-x-tablet-lg: (112em/16);
+$section-content-indent-x: math.div(152em, 16);
+$section-content-indent-x-mob: math.div(24em, 16);
+$section-content-indent-x-tablet: math.div(30em, 16);
+$section-content-indent-x-tablet-lg: math.div(112em, 16);
 
 // Fonts
 $font-primary: "Space Grotesk", sans-serif;
@@ -73,7 +75,7 @@ $regular: 400;
 $medium: 500;
 $semi-bold: 600;
 $bold: 700;
-$main-line-height: (26em/17);
+$main-line-height: math.div(26em, 17);
 
 // Colors
 $color-primary: #385a71;

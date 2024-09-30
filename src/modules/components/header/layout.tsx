@@ -32,14 +32,20 @@ export const Layout = () => {
                     <ul className="contacts">
                         <li>
                             <a href="tel:+380674694546">
-                                <span>Александр:</span>
+                                <span>Олександр:</span>
                                 <span>+380 67 469 4546</span>
                             </a>
                         </li>
                         <li>
                             <a href="tel:+380933736310">
-                                <span>Евгений:</span>
+                                <span>Євген:</span>
                                 <span>+380 93 373 6310</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:+380933736310">
+                                <span>Андрій:</span>
+                                <span>+380 98 798 8111</span>
                             </a>
                         </li>
                     </ul>

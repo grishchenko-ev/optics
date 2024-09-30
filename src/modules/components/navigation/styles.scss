@@ -1,6 +1,8 @@
 /*
 Navigation styles
  */
+@use "sass:math";
+
 @import "styles/base/mixins";
 @import "styles/base/variables";
 
@@ -13,7 +15,7 @@ nav {
 
       &:not(:last-child) {
 
-        margin-right: (16em/16);
+        margin-right: math.div(16em, 16);
       }
     }
   }

@@ -1,6 +1,8 @@
 /*
 Header styles
  */
+@use "sass:math";
+
 @import "styles/base/mixins";
 @import "styles/base/variables";
 @import "~breakpoint-sass/stylesheets/breakpoint";
@@ -19,11 +21,11 @@ header {
             }
 
             &:not(:last-child) {
-                margin-bottom: (10em/16);
+                margin-bottom: math.div(10em, 16);
 
                 @include breakpoint($mobile-p) {
                     margin-right: 0;
-                    margin-bottom: (6em/16);
+                    margin-bottom: math.div(6em, 16);
                 }
             }
 

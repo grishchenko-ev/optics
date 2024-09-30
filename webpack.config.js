@@ -1,9 +1,3 @@
-/**
- * Author: Alexander <Horat1us> Letnikow
- * Support: reclamme@gmail.com
- *
- * This file is Dark and full of Terrors
- */
 // tslint:disable
 const path = require("path"),
     fs = require("fs"),
@@ -18,6 +12,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin"),
     { CleanWebpackPlugin } = require("clean-webpack-plugin"),
     CopyWebpackPlugin = require("copy-webpack-plugin"),
     TerserPlugin = require("terser-webpack-plugin");
+ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 const meta = require("./meta.json");
 
@@ -33,15 +28,12 @@ const processEnv = Object.fromEntries(
 const config = {
     entry: path.resolve("./src/app/index.ts"),
     devServer: {
-        publicPath: "/",
-        contentBase: "./web",
-        noInfo: false,
-        hot: true,
-        inline: true,
         open: false,
-        historyApiFallback: true,
-        port: 8089,
         host: "0.0.0.0",
+        historyApiFallback: true,
+        static: {
+            publicPath: "/",
+        },
     },
 
     output: {
@@ -55,13 +47,15 @@ const config = {
     devtool: debug ? "source-map" : false,
 
     resolve: {
-        extensions: [".ts", ".tsx", ".js", ".json", ".jsx", ".css"],
-        modules: [path.resolve("node_modules"), path.resolve("src")],
+        extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
+        modules: ["./node_modules", "./src"].map((p) => path.resolve(p)),
         alias: {
-            normalize: path.join(__dirname, "/node_modules/normalize.css"),
+            "object-assign": path.resolve(
+                "./node_modules/core-js/internals/object-assign.js"
+            ),
         },
         fallback: {
-            util: require.resolve("util/"),
+            path: false,
         },
     },
 
@@ -116,16 +110,16 @@ const config = {
                 type: "asset/inline",
             },
             {
-                test: /\.tsx?$/,
-                use: [
-                    { loader: "babel-loader" },
-                    { loader: "ts-loader" },
-                ],
-            },
-            {
                 test: /\.jsx?$/,
                 exclude: [/node_modules/],
-                use: [{ loader: "babel-loader" }],
+                use: {
+                    loader: "babel-loader",
+                },
+            },
+            {
+                test: /\.(ts)x?$/,
+                exclude: [/node_modules/],
+                use: ["babel-loader", "ts-loader"],
             },
             {
                 test: /\.mp4$/,
@@ -135,6 +129,7 @@ const config = {
     },
 
     plugins: [
+        new ForkTsCheckerWebpackPlugin(),
         new MiniCssExtractPlugin({
             filename: `[name].v${meta.version}.css`,
             chunkFilename: `[name].[hash].css`,

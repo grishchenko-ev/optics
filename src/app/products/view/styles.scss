@@ -1,6 +1,8 @@
 /*
 View styles
  */
+@use "sass:math";
+
 @import "styles/base/mixins";
 @import "styles/base/variables";
 @import "~breakpoint-sass/stylesheets/breakpoint";
@@ -12,7 +14,7 @@ View styles
   &__item {
     width: 20%;
 
-    padding: 0 (16em/16);
+    padding: 0 math.div(16em, 16);
 
     @include breakpoint($mobile) {
       width: 50%;

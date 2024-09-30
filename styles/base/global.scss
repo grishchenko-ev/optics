@@ -1,6 +1,8 @@
 /*
 * Global styles
  */
+@use "sass:math";
+
 @import "~breakpoint-sass/stylesheets/breakpoint";
 @import "./variables";
 @import "./mixins";
@@ -41,7 +43,7 @@ body {
         display: flex;
         align-items: center;
 
-        max-width: (1200em/16);
+        max-width: math.div(1200em, 16);
 
         margin-right: auto;
         margin-left: auto;
@@ -117,7 +119,7 @@ body {
         > li {
             width: 25%;
 
-            padding: 0 (24em/16) 0;
+            padding: 0 math.div(24em, 16) 0;
 
             @include breakpoint($mobile) {
                 width: 100%;
@@ -174,7 +176,7 @@ article {
 
 main {
     width: 100%;
-    max-width: (1200em/16);
+    max-width: math.div(1200em, 16);
 
     flex: 1;
 
